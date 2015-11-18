@@ -3,8 +3,6 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 
-//The code in this program comes from https://open.gl
-
 int main(){
     //Initiliaze window setting values--------------
     sf::ContextSettings settings;
@@ -27,7 +25,7 @@ int main(){
     };//A triangle.
 
     //Make buffer (Vertex Buffer Object, "vbo") to store data
-    GLuint vbo; //GL unsigned int to store pointer of object.
+    GLuint vbo; //GL unsigned int to store pointer to object.
     glGenBuffers(1, &vbo); //Generate 1 buffer
 
     //Make Vertex Buffer Object the active array buffer.
@@ -38,7 +36,8 @@ int main(){
     //GL_STATIC_DRAW => The vertex data will be uploaded once and drawn many times
     //Determines in what kind of memory the data is stored on the graphics card for the highest efficiency.
 
-    //Add vertex shaders
+    //Add vertex shaders----------------------------
+    
 
     //Run main window loop--------------------------
     bool running = true;
