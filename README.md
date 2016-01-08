@@ -8,3 +8,4 @@ I am using this tutorial to make the program:
 https://open.gl/
 
 Most code in this program comes from this tutorial.
+Many of the comments are also directly from the tutorial.
