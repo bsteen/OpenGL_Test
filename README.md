@@ -1,6 +1,6 @@
 # OpenGL_Test
 A test program I am using to learn OpenGL.
-The ultimate goal of this project is to display two pictures side by side.
+This program displays three yellow, glowing triangles.
 
 It uses OpenGL, SFML, and GLEW.
 
