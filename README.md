@@ -1,6 +1,6 @@
 # OpenGL_Test
 A test program I am using to learn OpenGL.
-This program displays three yellow, glowing triangles.
+This program displays a .pgm image.
 
 It uses OpenGL, SFML, and GLEW.
 
