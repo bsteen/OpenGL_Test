@@ -1,12 +1,13 @@
 #define GLEW_STATIC
 #include <GL/glew.h>
-#include <SFML/Window.hpp>
 #include <iostream>
+#include <SFML/Window.hpp>
+#include <vector>
 #include "window.hpp"
 using namespace std;
 
 const GLchar* vertexSource =
-            "#version 150 core\n"
+            "#version 130\n"
             "in vec2 position;"//0
             "in vec2 texcoord;"//sizeof(float) * 2
 
@@ -17,7 +18,7 @@ const GLchar* vertexSource =
             "}";
 
 const GLchar* fragmentSource =
-            "#version 150 core\n"
+            "#version 130\n"
             "in vec2 Texcoord;"
 
             "out vec4 outColor;"
@@ -25,17 +26,29 @@ const GLchar* fragmentSource =
             "void main(){"
                 "outColor = texture(tex, Texcoord);"
             "}";
-
-void printShaderCompileStatus(GLuint shader, string name){
+//Only prints out if shader did not properly compile,.
+void printShaderCompileStatus(GLuint shader, string shaderName){
     GLint status;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
 
     if(!status){
-        cout <<  name + " shader did not compile!" << endl;
+        cout <<  shaderName + " shader did not compile!" << endl;
+
+        //Find out why it did't compile.
+        GLint logSize = 0;
+        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logSize);
+
+        std::vector<GLchar> errorLog(logSize);
+        glGetShaderInfoLog(shader, logSize, NULL, &errorLog[0]);
+
+        for(int i = 0; i < errorLog.size(); i++){
+            cout << errorLog[i];
+        }
+        cout << endl;
     }
 }
 
-void displayImage(char* imageData, int width, int height, int greyscale){
+void displayImage(char*& imageData, int width, int height, int greyscale){
     //Initiliaze window setting values
     sf::ContextSettings settings;
     settings.depthBits = 24;

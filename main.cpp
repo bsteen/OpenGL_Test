@@ -86,11 +86,11 @@ char* toRGB(int*& imageData, int width, int height){
 }
 
 int main(){
-	int* imageData = new int[512*512];
+	int* imageData = new int[1024*1024];
 	int width;
 	int height;
 	int greyscale;
-	string file= "lena.pgm";
+	string file= "mountian.pgm";
 
 	loadImage(imageData, width, height, greyscale, file);
 
