@@ -105,7 +105,7 @@ void displayImage(char*& imageData, int width, int height, int greyscale){
     glAttachShader(shaderProgram, vertexShader);//Only one vertex buffer can be active at a time.
     glAttachShader(shaderProgram, fragmentShader);
     glBindFragDataLocation(shaderProgram, 0, "outColor");//Fragements use outColor, which is the texture values.
-    glLinkProgram(shaderProgram);//After attaching the shaders, they must be linked toegther.
+    glLinkProgram(shaderProgram);//After attaching the shaders, they must be linked toegther. e
     glUseProgram(shaderProgram);//Start using the program. Only one program can be active at a time.
 
     GLint vertexByteSize = sizeof(GLfloat) * 4;//vec2 position and vec2 texcoord.
@@ -119,8 +119,7 @@ void displayImage(char*& imageData, int width, int height, int greyscale){
     glEnableVertexAttribArray(texAttrib);
     glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, vertexByteSize, (void*)(sizeof(GLfloat) * 2));
 
-    //Create a texture from imageData
-    GLuint imageTexture;
+    GLuint imageTexture;//Create a texture from imageData
     glGenTextures(1, &imageTexture);
     glBindTexture(GL_TEXTURE_2D, imageTexture);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, imageData);//Make the texture.
@@ -152,7 +151,7 @@ void displayImage(char*& imageData, int width, int height, int greyscale){
         //Display image
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);//Draw the texture.
         window.display();
     }
 

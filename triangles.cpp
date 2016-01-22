@@ -123,7 +123,6 @@ int main(){
     glEnableVertexAttribArray(posAttrib);//Enable the vertex attribute array that was just finalized.
 
     auto t_start = std::chrono::high_resolution_clock::now();
-
     GLint uniColor = glGetUniformLocation(shaderProgram, "triangleColor");//Get the location of the the fragment shader attribute.
     glUniform3f(uniColor, 1.0f, 1.0f, 0.0f); //Set the fragment shader color after it has already been compiled.
     //glUniformXY(...);  X = 3 = numer of compents (RGB), Y = f = float type

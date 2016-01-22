@@ -1,12 +1,12 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
+#include <vector>
 #include "window.hpp"
 using namespace std;
 
 //Load the image by typing in the file name;
-void loadImage(int* image_array, int& width, int& height, int& greyscale, string file)
+void loadImage(vector<int>& image_array, int& width, int& height, int& greyscale, string file)
 {
 	ifstream image_in(file);
 	string line;
@@ -24,9 +24,9 @@ void loadImage(int* image_array, int& width, int& height, int& greyscale, string
 			return;
 		}
 
-		//Skip over any comments
+
 		getline(image_in, line);
-		while (line.at(0) == '#'){
+		while (line.at(0) == '#'){//Skip over any comments
 			getline(image_in, line);
 		}
 
@@ -40,14 +40,7 @@ void loadImage(int* image_array, int& width, int& height, int& greyscale, string
 
 		width = stoi(dimensions[0]);//Now convert strings to integers
 		height = stoi(dimensions[1]);
-
-		if (width > 1024 || height > 1024){//Change this check to accommodate larger images. Make sure enough memory is allocated.
-			cout << "Incorrect image dimensions. Max size is 1024x1024." << endl;
-			return;
-		}
-		else{
-			cout << "The image dimensions are : " << width << "x" << height << endl;
-		}
+		cout << "The image dimensions are : " << width << "x" << height << endl;
 
 		//Get greyscale value
 		getline(image_in, line);
@@ -58,7 +51,8 @@ void loadImage(int* image_array, int& width, int& height, int& greyscale, string
 		for (int i = 0; i < width * height; i++){
 			image_in >> ws;//Extracts as many whitespace characters as possible from the current position in the input sequence.
 			getline(image_in, line, ' ');
-			image_array[i] = stoi(line);
+			image_array.push_back(stoi(line));
+
 		}
 		image_in.close();//close ifstream
 	}
@@ -69,7 +63,7 @@ void loadImage(int* image_array, int& width, int& height, int& greyscale, string
 	cout << "Finished loading image." << endl << endl;
 }
 
-char* toRGB(int*& imageData, int width, int height){
+char* toRGB(vector<int> imageData, int width, int height){
 	char* newImageData = new char[width*height*3];
 
 	int j = 0;
@@ -80,13 +74,11 @@ char* toRGB(int*& imageData, int width, int height){
 		j += 3;
 	}
 
-	delete imageData;
-
 	return newImageData;
 }
 
 int main(){
-	int* imageData = new int[1024*1024];
+	vector<int> imageData;
 	int width;
 	int height;
 	int greyscale;
@@ -100,6 +92,6 @@ int main(){
 	cout << "Displaying image..." << endl;
 	displayImage(rgbImageData, width, height, greyscale);
 
-	delete rgbImageData;
+	delete[] rgbImageData;
 	return 0;
 }
